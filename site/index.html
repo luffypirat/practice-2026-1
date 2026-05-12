@@ -3,182 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>АИС для ТК</title>
+    <title>АИС Транспорт — Интеллектуальная система склада</title>
     <style>
         :root {
-            --bg-dark: #0f172a;
-            --bg-card: #1e293b;
+            --bg: #020617;
+            --surface: #0f172a;
             --accent: #10b981;
-            --text-main: #f8fafc;
+            --text: #f8fafc;
             --text-muted: #94a3b8;
+            --border: #1e293b;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; scroll-behavior: smooth; }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        header { position: fixed; top: 0; width: 100%; background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 100; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.4rem; font-weight: 800; color: var(--accent); letter-spacing: -0.5px; }
+        nav a { color: var(--text); text-decoration: none; margin-left: 25px; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+        nav a:hover { color: var(--accent); }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            line-height: 1.6;
-        }
+        section { padding: 100px 8% 60px; min-height: 100vh; }
+        h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; }
+        h2 { font-size: 2.5rem; margin-bottom: 50px; border-left: 5px solid var(--accent); padding-left: 20px; }
+        h3 { color: var(--accent); margin-bottom: 15px; font-size: 1.5rem; }
 
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(15, 23, 42, 0.95);
-            padding: 20px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--bg-card);
-            z-index: 1000;
-        }
+        .hero { display: flex; align-items: center; gap: 50px; }
+        .hero-text { flex: 1; }
+        .hero-img { flex: 1; border-radius: 20px; border: 1px solid var(--border); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); width: 100%; height: auto; }
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--accent);
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: var(--surface); padding: 35px; border-radius: 16px; border: 1px solid var(--border); transition: transform 0.3s; }
+        .card:hover { transform: translateY(-5px); }
 
-        nav a {
-            color: var(--text-main);
-            text-decoration: none;
-            margin-left: 30px;
-            transition: color 0.3s;
-        }
+        .participant-card { background: var(--surface); padding: 25px; border-radius: 12px; border-left: 4px solid var(--accent); margin-bottom: 20px; }
+        .role-tag { font-size: 0.75rem; font-weight: 700; background: rgba(16, 185, 129, 0.1); color: var(--accent); padding: 4px 10px; border-radius: 20px; text-transform: uppercase; margin-bottom: 10px; display: inline-block; }
 
-        nav a:hover {
-            color: var(--accent);
-        }
+        .journal-post { margin-bottom: 50px; padding-bottom: 30px; border-bottom: 1px solid var(--border); }
+        .journal-date { color: var(--accent); font-weight: 700; margin-bottom: 10px; display: block; }
 
-        section {
-            padding: 120px 5% 80px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+        .resource-link { display: inline-block; padding: 12px 24px; background: var(--accent); color: var(--bg); text-decoration: none; border-radius: 8px; font-weight: 700; margin-top: 15px; transition: opacity 0.2s; }
+        .resource-link:hover { opacity: 0.9; }
 
-        h1 {
-            font-size: 4rem;
-            color: var(--accent);
-            line-height: 1.2;
-            margin-bottom: 20px;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            border-left: 4px solid var(--accent);
-            padding-left: 15px;
-        }
-
-        p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-            max-width: 800px;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 40px;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .card {
-            background: var(--bg-card);
-            padding: 30px;
-            border-radius: 12px;
-            border-top: 3px solid var(--accent);
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        .project-image {
-            width: 100%;
-            height: 450px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-muted);
-            border: 2px dashed var(--accent);
-            margin-bottom: 30px;
-        }
-
-        .journal-post {
-            background: var(--bg-card);
-            padding: 25px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border-left: 4px solid var(--accent);
-        }
-
-        .journal-date {
-            color: var(--accent);
-            font-weight: bold;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            background: var(--accent);
-            color: var(--bg-dark);
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-            transition: opacity 0.3s;
-        }
-
-        .btn:hover {
-            opacity: 0.8;
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .team-member {
-            background: var(--bg-card);
-            padding: 20px;
-            border-radius: 8px;
-        }
-
-        .team-member h4 {
-            color: var(--accent);
-            margin-bottom: 5px;
-        }
+        .stat-box { display: flex; gap: 40px; margin-top: 30px; }
+        .stat-item { text-align: center; }
+        .stat-value { font-size: 2rem; font-weight: 800; color: var(--accent); display: block; }
+        .stat-label { font-size: 0.8rem; color: var(--text-muted); }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">АИС Транспорт</div>
+        <div class="logo">АИС ТРАНСПОРТ</div>
         <nav>
-            <a href="#home">Аннотация</a>
+            <a href="#home">Главная</a>
             <a href="#about">О проекте</a>
             <a href="#team">Участники</a>
             <a href="#journal">Журнал</a>
@@ -186,110 +63,103 @@
         </nav>
     </header>
 
-    <section id="home">
-        <div class="grid-2">
-            <div>
-                <h1>Интеллектуальная логистика</h1>
-                <p>Автоматизированная Информационная Система для транспортной компании. Разработка системы автоматического определения объема груза на базе компьютерного зрения YOLOv10s и интеграция с WMS/TMS.</p>
-                <p>Решение исключает ручной труд, обеспечивая контроль соответствия объема груза перед погрузкой, рациональное распределение грузового пространства и повышение скорости логистической цепочки.</p>
-                <a href="#about" class="btn">Узнать больше</a>
-            </div>
-                <img src="images/6a7b8956109a4a928883bbfcdf5cf72f.jpg" alt="Описание картинки" class="project-image">
+    <section id="home" class="hero">
+        <div class="hero-text">
+            <h1>Интеллектуальный обмер грузов</h1>
+            <p>Аннотация: Наш проект представляет собой систему автоматизации процесса определения объёма груза в складских зонах. Используя современную модель нейросети YOLOv10s, мы обеспечиваем высокую точность и скорость обработки данных.</p>
+            <div class="stat-box">
+                <div class="stat-item">
+                    <span class="stat-value">10 сек</span>
+                    <span class="stat-label">время обработки </span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">>95%</span>
+                    <span class="stat-label">точность </span>
+                </div>
             </div>
         </div>
+        <img src="images/6a7b8956109a4a928883bbfcdf5cf72f.jpg" alt="Система в действии" class="hero-img">
     </section>
 
     <section id="about">
         <h2>О проекте</h2>
-        <div class="grid-2">
-            <div class="card" style="border-top-color: #ef4444;">
-                <h3>Проблема</h3>
-                <p>Медленная обработка: операторы тратят около 3 минут на 1 груз при ручном измерении.</p>
-                <p>Высокий процент ошибок: 10-20% расхождений при замере рулеткой вызывают штрафы и рекламации.</p>
-                <p>Неточный учёт кубатуры приводит к недозагрузке транспорта до 15% и росту себестоимости.</p>
+        <div class="grid">
+            <div class="card">
+                <h3>Проблематика</h3>
+                <p>Ручные замеры рулеткой занимают до 3 минут на один груз и допускают ошибки до 20%, что ведет к финансовым потерям из-за недозагрузки фур.</p>
             </div>
             <div class="card">
-                <h3>Решение</h3>
-                <p>Нейросетевое распознавание габаритов и типа груза в реальном времени с помощью YOLOv10s.</p>
-                <p>Время обработки сокращается до 10 секунд на 1 груз.</p>
-                <p>Бесшовная интеграция с существующими системами управления складом (WMS/TMS).</p>
+                <h3>Технологии</h3>
+                <p>В основе лежит стек PyTorch, OpenCV и Ultralytics YOLO. Мы интегрируем систему с WMS/TMS заказчика для бесшовного обмена данными.</p>
+            </div>
+            <div class="card">
+                <h3>Результат</h3>
+                <p>Чистый экономический эффект составляет 21 рубль с одного груза при маржинальности 80.8%, что гарантирует окупаемость системы менее чем за 3 месяца.</p>
             </div>
         </div>
-        <div class="media-placeholder" style="margin-top: 40px; height: 400px;">
-            [Место для схемы: YOLOv10s детекция груза на паллете]
+        <div style="margin-top: 50px; text-align: center;">
+            <p><strong>Цель проекта:</strong> Разработать и внедрить автоматизированную систему определения объёма груза по средствам YOLO модели для повышения эффективности логистической цепочки.</p>
         </div>
     </section>
 
     <section id="team">
-        <h2>Участники проекта</h2>
-        <p>Над проектом работает команда студентов, разделенная на разработку, математическое моделирование и экономический анализ.</p>
-
-        <div class="team-grid">
-            <div class="team-member">
-                <h4>Разработка и интеграция</h4>
-                <p>Богдан Алиханов (241-333) </p>
-                <p>Платон Останин (251-336) </p>
-                <p>Виктория Гильдеева (251-333)</p>
-                <p>Дарья Грехова (251-334)</p>
+        <h2>Участники и вклад</h2>
+        <div class="grid">
+            <div class="participant-card">
+                <span class="role-tag">ИТ-Инфраструктура и Интеграция</span>
+                <p class="member-name"><strong>Останин Платон Валерьевич (251-336)</strong></p>
+                <p>Проектирование АИС, разработка API для передачи данных и настройка серверной части для инференса нейросети.</p>
             </div>
-            <div class="team-member">
-                <h4>Прикладная математика</h4>
-                <p>Кирилл Бондаренко (241-131)</p>
-                <p>Кирилл Мокшин (241-132)</p>
-                <p>Ренат Пинчук (241-132)</p>
-                <p>Эмиль Сулейманов (241-132)</p>
+            <div class="participant-card">
+                <span class="role-tag">Анализ данных и Math</span>
+                <p><strong>Алиханов Б.Т., Бондаренко К.А., Мокшин К.А.</strong></p>
+                <p>Разработка математического модуля «пиксель → метры» и обучение модели детекции объектов.</p>
             </div>
-            <div class="team-member">
-                <h4>Экономика организаций</h4>
-                <p>Елена Островерхова (251-621)</p>
-                <p>Арина Полковникова (251-621)</p>
-                <p>Боссан Гылычджанова (251-622)</p>
+            <div class="participant-card">
+                <span class="role-tag">Экономический блок</span>
+                <p><strong>Островерхова Е.О., Гылычджанова Б., Полковникова А.Р.</strong></p>
+                <p>Расчет юнит-экономики, ROI и коммерческая упаковка продукта для транспортного сектора.</p>
             </div>
         </div>
+        <p style="margin-top: 20px; color: var(--text-muted);">В состав группы также входят: Пинчук Р.С., Сулейманов Э.Ш., Гильдеева В.С., Грехова Д.К., Дубинкин А.В., Коваль А.Е., Майкова Е.А., Федоров И.С., Хомидов Д.Ш..</p>
     </section>
 
     <section id="journal">
         <h2>Журнал разработки</h2>
-
         <div class="journal-post">
-            <span class="journal-date">Этап 1: Аналитика</span>
-            <h3>Анализ требований и проектирование системы</h3>
-            <p>Начальный этап включал взаимодействие с заказчиком для получения данных для формирования обучающего материала[cite: 213, 214]. Была спроектирована архитектура решения на базе YOLOv8 и PyTorch[cite: 222, 225].</p>
+            <span class="journal-date">Февраль 2026</span>
+            <h3>Аналитика и проектирование</h3>
+            <p>Проведен анализ требований заказчика, оценка качества детекции и проектирование архитектуры системы. Выбор базовых моделей YOLOv8 и YOLOv10s.</p>
         </div>
-
         <div class="journal-post">
-            <span class="journal-date">Этап 2: Обучение</span>
-            <h3>Подготовка данных и обучение модели</h3>
-            <p>Использована платформа Roboflow для разметки изображений и управления наборами данных[cite: 226]. Заказчик предоставил вычислительные ресурсы для проведения обучения разработанной нейронной сети[cite: 215]. Разработан алгоритм, позволяющий рассчитать объем груза[cite: 230].</p>
+            <span class="journal-date">Март 2026</span>
+            <h3>Разработка и обучение</h3>
+            <p>Подготовка датасета в Roboflow. Реализован и протестирован модуль перевода пикселей в метрические единицы для точного замера.</p>
         </div>
-
         <div class="journal-post">
-            <span class="journal-date">Этап 3: Прототип</span>
-            <h3>Разработка и тестирование программного прототипа</h3>
-            <p>Программа была протестирована и улучшена. Добавлен удобный способ для передачи данных, использующий API для бесшовной интеграции с WMS системами[cite: 232].</p>
+            <span class="journal-date">Апрель 2026</span>
+            <h3>Тестирование и API</h3>
+            <p>Разработка программного прототипа, внедрение калибровки и финальное тестирование передачи данных через API. Модель дообучена на данных клиента.</p>
         </div>
     </section>
 
     <section id="resources">
-        <h2>Ресурсы и технологии</h2>
-        <div class="grid-3">
+        <h2>Ресурсы</h2>
+        <div class="grid">
             <div class="card">
-                <h3>PyTorch</h3>
-                <p>Основной фреймворк для глубокого обучения, используемый для вычислений тензоров с ускорением на GPU.</p>
-                <br>
-                <a href="https://pytorch.org/" target="_blank" class="btn">Документация</a>
+                <h3>Организация-партнер</h3>
+                <p>Московский Политех — база для разработки проекта и проведения испытаний системы автоматизации складов.</p>
+                <a href="https://mospolytech.ru" class="resource-link" target="_blank">Перейти на сайт</a>
             </div>
             <div class="card">
-                <h3>Ultralytics YOLO</h3>
-                <p>Основной фреймворк компьютерного зрения. В проекте применяются модели детекции объектов (YOLOv8 и YOLOv10s).</p>
-                <br>
-                <a href="https://github.com/ultralytics/ultralytics" target="_blank" class="btn">GitHub</a>
+                <h3>Технологическая база</h3>
+                <p>Документация Ultralytics YOLO и PyTorch — основные ресурсы для понимания архитектуры современных нейросетей.</p>
+                <a href="https://docs.ultralytics.com/" class="resource-link" target="_blank">YOLO Docs</a>
             </div>
             <div class="card">
-                <h3>Roboflow & OpenCV</h3>
-                <p>Инструменты для обработки изображений, видеопотока, а также разметки и управления наборами данных (dataset).</p>
-                <br>
-                <a href="https://roboflow.com/" target="_blank" class="btn">Платформа</a>
+                <h3>Разметка данных</h3>
+                <p>Платформа Roboflow, позволившая организовать качественную разметку обучающей выборки для логистических грузов.</p>
+                <a href="https://roboflow.com" class="resource-link" target="_blank">Roboflow</a>
             </div>
         </div>
     </section>
