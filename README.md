@@ -15,6 +15,8 @@
 Задание размещено в папке **task** в файле [README.md](task/README.md).
 Выполненное задание находится в [index.html](site/index.html)
 
+https://luffypirat.github.io/practice-2025-1/site/index.html
+
 ## Вариативная часть задания
 
 Практическая реализация технологии "Telegram-бот для управлением списком дел"
